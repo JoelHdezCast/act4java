@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Deck extends JFrame implements ActionListener{
     private List <Card> cards = new ArrayList<Card>(52);
+    JFrame f;
 
     private JButton shuffleB, headB, pickB, handB, crearB;
     private JTextArea area;
@@ -40,7 +41,7 @@ public class Deck extends JFrame implements ActionListener{
         handB = new JButton("Hand");
         window.add(handB);
         handB.addActionListener(this);
-        area = new JTextArea(100,100);
+        area = new JTextArea(50,50);
         window.add(area);
     }
 
@@ -92,10 +93,16 @@ public class Deck extends JFrame implements ActionListener{
     }*/
 
     public void shuffle(){
+        if (cards.size() == 0) {
+            OptionPane();
+        }
         Collections.shuffle(cards);
     }
 
     public String head(){
+        if (cards.size() == 0) {
+            OptionPane();
+        }
         String carta = "\n" + cards.get(0).getColor().toString()+ " " + cards.get(0).getPalo().toString() + " " + cards.get(0).getValor().toString() +
                 "\nQuedan: " + cards.size();
         cards.remove(0);
@@ -103,6 +110,9 @@ public class Deck extends JFrame implements ActionListener{
     }
 
     public String pick(){
+        if (cards.size() == 0) {
+            OptionPane();
+        }
         int random = (new Random().nextInt(cards.size()));
         String carta = "\n" + cards.get(random).getColor().toString()+ " " + cards.get(random).getPalo().toString() + " " + cards.get(random).getValor().toString() +
                 "\nQuedan: " + cards.size();
@@ -120,6 +130,11 @@ public class Deck extends JFrame implements ActionListener{
     public String Size(){
         String tam = "\nQuedan: " + cards.size();
         return tam;
+    }
+
+    public void OptionPane(){
+        f=new JFrame();
+        JOptionPane.showMessageDialog(f,"ya no hay cartas en el deck");
     }
 
 }
