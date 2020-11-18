@@ -22,7 +22,7 @@ public class Main extends JFrame implements ActionListener {
         frame.createGUI();
         frame.setVisible(true);
     }
-
+    //Se crea la interfaz gráfica
     private void createGUI(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Container window = getContentPane();
@@ -47,6 +47,7 @@ public class Main extends JFrame implements ActionListener {
 
     }
 
+    //Se define lo que hace cada boton
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == agregarB){
@@ -54,6 +55,7 @@ public class Main extends JFrame implements ActionListener {
             String nom = nombre.getText();
             book.cargarArchivo();
             book.guardar(nom, num);
+            areaT.append("se agregó el contacto\n");
         }
         if (e.getSource() == borrarB){
             String num = numero.getText();
@@ -61,10 +63,12 @@ public class Main extends JFrame implements ActionListener {
             book.cargarArchivo();
             book.contactos.remove(num, nom);
             book.guardarArchivo();
+            areaT.append("se borró el contacto\n");
         }
         if (e.getSource() == mostrarB){
             book.cargarArchivo();
             String lista = "";
+            //Se pasan los datos de la hashmap a una variable string
             for (Map.Entry<String, String> aux : book.contactos.entrySet()) {
                 lista = lista.concat(aux.getKey() + ":" + aux.getValue() + "\n");
             }
